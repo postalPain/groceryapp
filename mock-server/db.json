@@ -1,0 +1,14 @@
+{
+  "groceries": [{
+    "id": 23,
+    "name": "Rise",
+    "amount": 3,
+    "bought": false
+  },
+  {
+    "id": 24,
+    "name": "Milk",
+    "amount": 3,
+    "bought": false
+  }]
+}
