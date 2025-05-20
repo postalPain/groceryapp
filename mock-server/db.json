@@ -1,14 +1,44 @@
 {
-  "groceries": [{
-    "id": 23,
-    "name": "Rise",
-    "amount": 3,
-    "bought": false
-  },
-  {
-    "id": 24,
-    "name": "Milk",
-    "amount": 3,
-    "bought": false
-  }]
+  "grocery-lists": [
+    {
+      "groceries": [
+        {
+          "id": "23",
+          "name": "Rise",
+          "amount": 2,
+          "amountType": "kg",
+          "bought": false
+        },
+        {
+          "id": "019036",
+          "name": "Milk",
+          "amount": 1,
+          "amountType": "l",
+          "bought": false
+        }
+      ],
+      "id": "1",
+      "name": "Super list3"
+    },
+    {
+      "id": "779c",
+      "name": "Milk"
+    },
+    {
+      "id": "74f0",
+      "name": "asdf"
+    },
+    {
+      "id": "559e",
+      "name": "Alforfon"
+    },
+    {
+      "id": "1864",
+      "name": "Coco"
+    },
+    {
+      "id": "f297",
+      "name": "asdfasd"
+    }
+  ]
 }

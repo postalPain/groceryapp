@@ -1,0 +1,19 @@
+i[class^="icon-"],
+i[class*=" icon-"] {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    vertical-align: baseline;
+}
+i[class^="icon_size_big"],
+i[class*=" icon_size_big"] {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.icon-back {
+    background-image: url('./assets/back_arrow.svg');
+}

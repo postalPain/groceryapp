@@ -11,4 +11,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    watch: {
+      // 👇  a picomatch-style glob, RegExp, or array of globs
+      ignored: [
+        // ignore an entire directory
+        '**/mock-server/**/*.*'
+      ]
+    }
+  }
 })

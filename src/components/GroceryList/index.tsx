@@ -1,35 +1,58 @@
-import React from 'react';
-import type {IGrocery} from '../../services/api/types.ts';
+import React, { useState } from 'react';
+import {useTranslation} from 'react-i18next';
+import {Link} from 'react-router';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
+import GroceryListItem from '../GroceryListItem';
+import type {IGroceryList} from '../../services/api/types.ts';
+import queries from '../../services/api/queries.ts';
+
 
 type GroceryListProps = {
-    data?: IGrocery[];
+    data: IGroceryList;
 }
 const GroceryList: React.FC<GroceryListProps> = ({
     data,
 }) => {
+    const { t } = useTranslation();
+    const [updatingGroceryId, setUpdatingGroceryId] = useState<string | undefined>();
+    const { mutate: updateList } = useMutation(queries.groceries.updateList);
+    const queryClient = useQueryClient();
+    const onListItemBoughtToggle = (id: string) => {
+        const newGroceries = data.groceries.map((g) => {
+            const updatedGrocery = { ...g };
+            if (g.id === id) {
+                updatedGrocery.bought = !g.bought;
+            }
+            return updatedGrocery;
+        });
+        setUpdatingGroceryId(id);
+        updateList({
+            id: data.id,
+            groceries: newGroceries,
+        }, {
+            onSuccess: async () => {
+                await queryClient.invalidateQueries({ queryKey: ['grocery-lists']});
+                setUpdatingGroceryId(undefined);
+            }
+        });
+    };
 
-    if (!data) {
-        return (
-            <div>Grocery list is empty</div>
-        )
-    }
     return (
         <div>
+            <div className="flex items-baseline">
+                <h1 className="text-4xl lg:text-5xl font-bold tracking-tight flex-1 mb-4">{data.name}</h1>
+                <div><Link className="hover:cursor-pointer text-yellow-700 underline-offset-2 hover:text-yellow-900" to={`/lists/${data.id}/edit`}>{t('edit')}</Link></div>
+            </div>
             <ul className="divide-y divide-gray-100">
-                {data.map((item, index) => (
-                    <li
+                {data.groceries.map((item, index) => (
+                    <GroceryListItem
                         key={item.id}
-                        className="flex justify-between gap-x-6 py-5 px-5"
-                    >
-                        <div>{index + 1}</div>
-                        <div className="flex-1">
-                            {`${item.name} (${item.amount})`}
-                        </div>
-                        <div>remove</div>
-                        <div>
-                            {item.bought ? 'Yes' : 'No'}
-                        </div>
-                    </li>
+                        index={index}
+                        {...item}
+                        updating={item.id === updatingGroceryId}
+                        disabled={!!updatingGroceryId && updatingGroceryId !== item.id}
+                        onToggleBought={onListItemBoughtToggle}
+                    />
                 ))}
             </ul>
         </div>
