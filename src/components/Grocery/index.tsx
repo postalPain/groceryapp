@@ -14,7 +14,6 @@ import {Button} from '../ui/button.tsx';
 import {useTranslation} from 'react-i18next';
 
 
-
 const formSchema = z.object({
     id: z.string(),
     name: z.string().nonempty(),
@@ -22,7 +21,6 @@ const formSchema = z.object({
     amountType: z.enum(['kg', 'l', 'unit']),
     bought: z.boolean(),
 });
-
 
 type GroceryProps = {
     initData?: Partial<IGrocery>;
@@ -155,14 +153,14 @@ const Grocery: React.FC<GroceryProps> = ({
                                         name="bought"
                                         render={({field}) => (
                                             <FormItem
-                                                className="flex flex-row items-start space-y-0">
+                                                className="flex flex-row items-center space-y-0">
                                                 <FormControl>
                                                     <Checkbox
                                                         checked={field.value}
                                                         onCheckedChange={field.onChange}
                                                     />
                                                 </FormControl>
-                                                <div className="space-y-1 leading-none">
+                                                <div className="leading-none">
                                                     <FormLabel>
                                                         {t('grocery_form_bought_checkbox')}
                                                     </FormLabel>
@@ -176,8 +174,18 @@ const Grocery: React.FC<GroceryProps> = ({
                                 <Separator className="mb-0"/>
                             </div>
                             <CardFooter className="flex justify-between">
-                                <Button type="button" variant="outline" onClick={onClose}>{t('cancel')}</Button>
-                                <Button type="submit">{t('save')}</Button>
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    onClick={onClose}
+                                >
+                                    {t('cancel')}
+                                </Button>
+                                <Button
+                                    type="submit"
+                                >
+                                    {t('save')}
+                                </Button>
                             </CardFooter>
                         </form>
                     </Form>

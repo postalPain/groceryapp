@@ -36,11 +36,13 @@ const GroceryList: React.FC<GroceryListProps> = ({
             }
         });
     };
+    const boughtGroceries = data.groceries.reduce((acc, g) => g.bought ? acc + 1 : acc, 0);
+
 
     return (
         <div>
             <div className="flex items-baseline">
-                <h1 className="text-4xl lg:text-5xl font-bold tracking-tight flex-1 mb-4">{data.name}</h1>
+                <h1 className="text-4xl lg:text-5xl font-bold tracking-tight flex-1 mb-4">{data.name}{!!data.groceries.length && <span> {`(${boughtGroceries}/${data.groceries.length})`}</span>}</h1>
                 <div><Link className="hover:cursor-pointer text-yellow-700 underline-offset-2 hover:text-yellow-900" to={`/lists/${data.id}/edit`}>{t('edit')}</Link></div>
             </div>
             <ul className="divide-y divide-gray-100">

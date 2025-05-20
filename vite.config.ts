@@ -12,6 +12,7 @@ export default defineConfig({
     },
   },
   server: {
+    host: '0.0.0.0',
     watch: {
       // 👇  a picomatch-style glob, RegExp, or array of globs
       ignored: [

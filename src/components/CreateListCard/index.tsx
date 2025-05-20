@@ -25,7 +25,7 @@ const CreateListCard: React.FC<CreateListCardProps> = ({
     const [listName, setListName] = useState<string>('');
     const onListFormSubmit = () => {
         if (listName) {
-            onSubmit({ name: listName });
+            onSubmit({ name: listName, groceries: [] });
         }
     };
     return (
