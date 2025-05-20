@@ -5,7 +5,7 @@ const wait = (time = 1000) =>
     new Promise(resolve => setTimeout(resolve, time));
 
 export const slowResponse = async <T>(data: T): Promise<T> => {
-    await wait(2000);
+    await wait(100);
     return data;
 };
 

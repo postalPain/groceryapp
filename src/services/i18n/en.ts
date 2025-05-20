@@ -18,6 +18,7 @@ export default {
         'remove': 'Remove',
         'edit': 'Edit',
         'update': 'Update',
+        'confirm': 'Confirm',
         'logo_text': 'Grocery super app',
         'grocery_form_name': 'Name:',
         'grocery_form_name_placeholder': 'Enter grocery name...',
@@ -32,5 +33,7 @@ export default {
         'list_edit_groceries': 'Groceries',
         'list_edit_add_grocery': 'Add grocery',
         'prompt_remove_grocery': 'Are you sure you want to remove this item?',
+        'message_box_title': 'Attention!!!',
+        'grocery_remove_mb_message': 'Are you sure that you want to remove this item?',
     }
 };

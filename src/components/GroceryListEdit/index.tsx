@@ -14,6 +14,7 @@ import Grocery from '../Grocery';
 import queries from '../../services/api/queries.ts';
 import {Separator} from '../ui/separator.tsx';
 import ScreenLoader from '../ScreenLoader';
+import MessageBox from '../MessageBox';
 
 
 const formSchema = z.object({
@@ -31,6 +32,7 @@ const GroceryList: React.FC<GroceryListProps> = ({
     const {t} = useTranslation();
     const { mutate: updateList } = useMutation(queries.groceries.updateList);
     const [isUpdating, setIsUpdating] = useState<boolean>(false);
+    const [groceryItemRemoveId, setGroceryItemRemoveId] = useState<string | undefined>();
     const queryClient = useQueryClient();
     const [editGroceryId, setEditGroceryId] = useState<string | undefined>();
     const form = useForm<z.infer<typeof formSchema>>({
@@ -40,16 +42,15 @@ const GroceryList: React.FC<GroceryListProps> = ({
             name: data?.name,
         },
     });
-    const onListItemRemove = (id: string) => {
-        if (!window.confirm(t('prompt_remove_grocery'))) {
-            return;
-        }
+    const onConfirmItemRemove = () => {
         if (data?.groceries) {
+            const id = groceryItemRemoveId;
             const itemIndex = data.groceries.findIndex(item => item.id === id);
             const newGroceries = [
                 ...data!.groceries.slice(0, itemIndex),
                 ...data!.groceries.slice(itemIndex + 1),
             ];
+            setGroceryItemRemoveId(undefined);
             setIsUpdating(true);
             updateList({
                 id: data.id,
@@ -61,6 +62,9 @@ const GroceryList: React.FC<GroceryListProps> = ({
                 }
             });
         }
+    };
+    const onListItemRemove = (id: string) => {
+        setGroceryItemRemoveId(id);
     };
     const onListItemEdit = (id: string) => {
         setEditGroceryId(id);
@@ -177,6 +181,14 @@ const GroceryList: React.FC<GroceryListProps> = ({
                     initData={groceryData}
                     onClose={onGroceryEditClose}
                     onSubmit={onGroceryEdit}
+                />
+            )}
+            {!!groceryItemRemoveId && (
+                <MessageBox
+                    title={t('message_box_title')}
+                    message={t('grocery_remove_mb_message')}
+                    onCancel={() => setGroceryItemRemoveId(undefined)}
+                    onConfirm={onConfirmItemRemove}
                 />
             )}
         </div>

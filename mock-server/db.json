@@ -7,18 +7,18 @@
           "name": "Rise",
           "amount": 2,
           "amountType": "kg",
-          "bought": false
+          "bought": true
         },
         {
           "id": "019036",
           "name": "Milk",
-          "amount": 1,
+          "amount": 2,
           "amountType": "l",
           "bought": false
         }
       ],
       "id": "1",
-      "name": "Super list3"
+      "name": "Super list"
     },
     {
       "id": "779c",

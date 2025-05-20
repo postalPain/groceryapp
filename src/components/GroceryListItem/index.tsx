@@ -38,7 +38,7 @@ const GroceryListItem: React.FC<GroceryListItemProps> = ({
                     {updating && (<Spinner size="small" />)}
                 </div>
             )}
-            <div>{index + 1}</div>
+            <div className={`${bought ? 'line-through' : ''}`}>{index + 1}</div>
             {
                 isEdit ? (
                     <div
@@ -55,7 +55,7 @@ const GroceryListItem: React.FC<GroceryListItemProps> = ({
             }
             {isEdit && (
                 <div
-                    className="hover:cursor-pointer text-red-700 underline-offset-2 hover:text-red-900"
+                    className="hover:cursor-pointer text-sm text-red-700 underline-offset-2 hover:text-red-900"
                     onClick={() => onRemove && onRemove(id)}>
                     {t('remove')}
                 </div>

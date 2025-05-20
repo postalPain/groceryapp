@@ -33,7 +33,7 @@ const HomePage: React.FC = () => {
         <>
             {groceryList ?
                 <GroceryList data={groceryList}/>
-                : <div className="hover:cursor-pointer text-yellow-700 underline-offset-2 hover:text-yellow-900">{t('home_page_empty_list_0')} <span
+                : <div>{t('home_page_empty_list_0')} <span className="hover:cursor-pointer text-yellow-700 underline-offset-2 hover:text-yellow-900"
                     onClick={() => setIsNewListCardVisible(true)}>{t('home_page_create_list')}</span>.</div>
             }
             {isNewListCardVisible && (

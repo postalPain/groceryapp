@@ -61,7 +61,7 @@ const Grocery: React.FC<GroceryProps> = ({
         return () => {
             window.removeEventListener('keydown', keyPressListener);
         }
-    }, [onSubmit, onClose]);
+    }, [onClose]);
 
 
     return (

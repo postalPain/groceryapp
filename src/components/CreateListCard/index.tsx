@@ -29,33 +29,38 @@ const CreateListCard: React.FC<CreateListCardProps> = ({
         }
     };
     return (
-        <div
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-primary opacity-60 transition-opacity animate-fade-out"
-        >
-            <Card className="w-[350px]">
-                <CardHeader>
-                    <CardTitle>{t('create_list_card_title')}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div className="grid w-full items-center gap-4">
-                        <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="name">{t('create_list_card_name_label')}</Label>
-                            <Input
-                                id="name"
-                                required
-                                autoFocus
-                                placeholder={t('create_list_card_name_placeholder')}
-                                onChange={e => setListName(e.target.value)}
-                            />
+        <>
+            <div
+                className="fixed inset-0 z-50 bg-primary opacity-60 transition-opacity animate-fade-out"
+            />
+            <div
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+            >
+                <Card className="w-[350px]">
+                    <CardHeader>
+                        <CardTitle>{t('create_list_card_title')}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="grid w-full items-center gap-4">
+                            <div className="flex flex-col space-y-1.5">
+                                <Label htmlFor="name">{t('create_list_card_name_label')}</Label>
+                                <Input
+                                    id="name"
+                                    required
+                                    autoFocus
+                                    placeholder={t('create_list_card_name_placeholder')}
+                                    onChange={e => setListName(e.target.value)}
+                                />
+                            </div>
                         </div>
-                    </div>
-                </CardContent>
-                <CardFooter className="flex justify-between">
-                    <Button variant="outline" onClick={onCancel}>{t('cancel')}</Button>
-                    <Button onClick={onListFormSubmit}>{t('create')}</Button>
-                </CardFooter>
-            </Card>
-        </div>
+                    </CardContent>
+                    <CardFooter className="flex justify-between">
+                        <Button variant="outline" onClick={onCancel}>{t('cancel')}</Button>
+                        <Button onClick={onListFormSubmit}>{t('create')}</Button>
+                    </CardFooter>
+                </Card>
+            </div>
+        </>
     );
 };
 
