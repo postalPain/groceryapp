@@ -24,7 +24,7 @@ const formSchema = z.object({
 
 
 type GroceryListProps = {
-    data?: IGroceryList;
+    data: IGroceryList;
 }
 const GroceryList: React.FC<GroceryListProps> = ({
     data,
@@ -74,39 +74,38 @@ const GroceryList: React.FC<GroceryListProps> = ({
     };
     const onGroceryEdit = (grocery: IGrocery) => {
         setEditGroceryId(undefined);
-        if (data?.groceries) {
-            const isNew = grocery.id === 'new';
-            let newGroceries: IGrocery[];
-            if (isNew) {
-                const newId = `${Math.random().toString(10).slice(2, 8)}`;
-                newGroceries = [...data.groceries, { ...grocery, id: newId }];
-            } else {
-                newGroceries = data.groceries.map((g) => {
-                    if (g.id === grocery.id) {
-                        return {
-                            ...g,
-                            ...grocery,
-                        }
+        const groceries = data?.groceries ?? [];
+        const isNew = grocery.id === 'new';
+        let newGroceries: IGrocery[];
+        if (isNew) {
+            const newId = `${Math.random().toString(10).slice(2, 8)}`;
+            newGroceries = [...groceries, { ...grocery, id: newId }];
+        } else {
+            newGroceries = groceries.map((g) => {
+                if (g.id === grocery.id) {
+                    return {
+                        ...g,
+                        ...grocery,
                     }
-                    return g;
-                });
-            }
-            setIsUpdating(true);
-            updateList({
-                id: data.id,
-                groceries: newGroceries,
-            }, {
-                onSuccess: async () => {
-                    await queryClient.invalidateQueries({queryKey: ['grocery-list', data.id]});
-                    setIsUpdating(false);
                 }
+                return g;
             });
         }
+        setIsUpdating(true);
+        updateList({
+            id: data?.id,
+            groceries: newGroceries,
+        }, {
+            onSuccess: async () => {
+                await queryClient.invalidateQueries({queryKey: ['grocery-list', data.id]});
+                setIsUpdating(false);
+            }
+        });
     };
     const onNewGroceryClick = () => {
         setEditGroceryId('new')
     }
-    const groceryData = data?.groceries.find(item => item.id === editGroceryId) || { id: editGroceryId } as Partial<IGrocery>;
+    const groceryData = data?.groceries?.find(item => item.id === editGroceryId) || { id: editGroceryId } as Partial<IGrocery>;
     const onListFormSubmit = (data: Partial<IGroceryList>) => {
         setIsUpdating(true);
         updateList({
@@ -159,8 +158,8 @@ const GroceryList: React.FC<GroceryListProps> = ({
                 </div>
             </div>
             <Separator />
-            {!data
-                ? <div>Grocery list is empty</div>
+            {!data?.groceries?.length
+                ? <div className="py-10 text-center">{t('grocery_list_edit_empty_list')}</div>
                 : (
                     <ul className="divide-y divide-gray-100">
                         {data.groceries.map((item, index) => (

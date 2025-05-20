@@ -14,10 +14,10 @@ const GroceryListEditPage: React.FC = () => {
     const { isPending, error, data } = useQuery(queries.groceries.getList(id));
 
     const renderContent = () => (
-        <>
+        <div className="p-5">
             <h1 className="text-4xl mb-8 font-bold">{t('grocery_list_edit_page')}</h1>
-            <GroceryListEdit data={data}/>
-        </>
+            {data && <GroceryListEdit data={data}/> }
+        </div>
     );
 
     if (error) {
@@ -29,9 +29,7 @@ const GroceryListEditPage: React.FC = () => {
     return (
         <>
             <Header showBackButton />
-            <div className="p-5">
-                {!isPending && renderContent()}
-            </div>
+            {!isPending  && renderContent()}
             {isPending && <ScreenLoader />}
         </>
     )

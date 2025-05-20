@@ -35,5 +35,6 @@ export default {
         'prompt_remove_grocery': 'Are you sure you want to remove this item?',
         'message_box_title': 'Attention!!!',
         'grocery_remove_mb_message': 'Are you sure that you want to remove this item?',
+        'grocery_list_edit_empty_list': 'Grocery list is empty. Please add one.'
     }
 };
