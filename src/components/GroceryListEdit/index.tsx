@@ -45,11 +45,7 @@ const GroceryList: React.FC<GroceryListProps> = ({
     const onConfirmItemRemove = () => {
         if (data?.groceries) {
             const id = groceryItemRemoveId;
-            const itemIndex = data.groceries.findIndex(item => item.id === id);
-            const newGroceries = [
-                ...data!.groceries.slice(0, itemIndex),
-                ...data!.groceries.slice(itemIndex + 1),
-            ];
+            const newGroceries = data.groceries.filter(item => item.id !== id);
             setGroceryItemRemoveId(undefined);
             setIsUpdating(true);
             updateList({
