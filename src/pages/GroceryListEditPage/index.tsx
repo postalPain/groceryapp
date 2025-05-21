@@ -4,7 +4,6 @@ import { useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import queries from '../../services/api/queries.ts';
 import GroceryListEdit from '../../components/GroceryListEdit';
-import Header from '../../components/Header';
 import ScreenLoader from '../../components/ScreenLoader';
 
 
@@ -28,7 +27,6 @@ const GroceryListEditPage: React.FC = () => {
 
     return (
         <>
-            <Header showBackButton />
             {!isPending  && renderContent()}
             {isPending && <ScreenLoader />}
         </>

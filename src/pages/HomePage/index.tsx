@@ -7,7 +7,6 @@ import GroceryList from '../../components/GroceryList';
 import CreateListCard from '../../components/CreateListCard';
 import type {IGroceryList} from '../../services/api/types.ts';
 import ScreenLoader from '../../components/ScreenLoader';
-import Header from '../../components/Header';
 
 
 const HomePage: React.FC = () => {
@@ -52,13 +51,10 @@ const HomePage: React.FC = () => {
     }
 
     return (
-        <>
-            <Header />
-            <div className="p-5">
-                {!isPending && renderContent()}
-                {(isPending || isCreationPending) && <ScreenLoader/>}
-            </div>
-        </>
+        <div className="p-5">
+            {!isPending && renderContent()}
+            {(isPending || isCreationPending) && <ScreenLoader/>}
+        </div>
     )
 };
 
