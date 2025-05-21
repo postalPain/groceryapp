@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "mock-server": "npx json-server mock-server/db.json",
+    "mock-server": "npx json-server mock-server/db.json --host 0.0.0.0",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
