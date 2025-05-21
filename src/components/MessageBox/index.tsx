@@ -43,9 +43,9 @@ const MessageBox: React.FC<MessageBoxProps> = ({
                 className="fixed inset-0 z-50 bg-primary opacity-60 transition-opacity animate-fade-out"
             />
             <div
-                className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+                className="fixed inset-0 p-5 z-50 flex flex-col items-center justify-center"
             >
-                <Card className="w-[350px]">
+                <Card className="w-full sm:w-90">
                     <CardHeader>
                         <CardTitle>{title}</CardTitle>
                         <CardDescription>{message}</CardDescription>
