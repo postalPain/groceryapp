@@ -34,7 +34,7 @@ const GroceryListItem: React.FC<GroceryListItemProps> = ({
         <li className={`flex justify-between gap-x-5 py-5 ${disabled ? ' pointer-events-none' : ''}`}>
             {(!isEdit && onToggleBought) && (
                 <div className="flex items-center content-center w-4">
-                    {!updating && <input type="checkbox" disabled={disabled} defaultChecked={bought} onChange={() => onToggleBought(id)} />}
+                    {!updating && <input type="checkbox" disabled={disabled} checked={bought} onChange={() => onToggleBought(id)} />}
                     {updating && (<Spinner size="small" />)}
                 </div>
             )}
